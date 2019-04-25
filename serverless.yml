@@ -104,10 +104,10 @@ functions:
           path: users
           method: put
   getUser:
-    handler: handler.updateUser
+    handler: handler.getUser
     events:
       - http:
-          path: user
+          path: users
           method: get
 
 #    The following are a few example events you can configure
