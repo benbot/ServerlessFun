@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "0042efe2-6bc3-4883-b631-9d548b2a6884",
+		"name": "OTHW",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/users?email=rolf.hegdal@example.com",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "rolf.hegdal@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"results\": [\n    {\n      \"gender\": \"male\",\n      \"name\": {\n        \"title\": \"mr\",\n        \"first\": \"rolf\",\n        \"last\": \"hegdal\"\n      },\n      \"location\": {\n        \"street\": \"ljan terrasse 346\",\n        \"city\": \"vear\",\n        \"state\": \"rogaland\",\n        \"postcode\": \"3095\",\n        \"coordinates\": {\n          \"latitude\": \"54.8646\",\n          \"longitude\": \"-97.3136\"\n        },\n        \"timezone\": {\n          \"offset\": \"-10:00\",\n          \"description\": \"Hawaii\"\n        }\n      },\n      \"email\": \"rolf.hegdal@example.com\",\n      \"login\": {\n        \"uuid\": \"c4168eac-84b8-46ea-b735-c9da9bfb97fd\",\n        \"username\": \"bluefrog786\",\n        \"password\": \"ingrid\",\n        \"salt\": \"GtRFz4NE\",\n        \"md5\": \"5c581c5748fc8c35bd7f16eac9efbb55\",\n        \"sha1\": \"c3feb8887abed9ec1561b9aa2c9f58de21d1d3d9\",\n        \"sha256\": \"684c478a98b43f1ef1703b35b8bbf61b27dbc93d52acd515e141e97e04447712\"\n      },\n      \"dob\": {\n        \"date\": \"1975-11-12T06:34:44Z\",\n        \"age\": 42\n      },\n      \"registered\": {\n        \"date\": \"2015-11-04T22:09:36Z\",\n        \"age\": 2\n      },\n      \"phone\": \"66976498\",\n      \"cell\": \"40652479\",\n      \"id\": {\n        \"name\": \"FN\",\n        \"value\": \"12117533881\"\n      },\n      \"picture\": {\n        \"large\": \"https://randomuser.me/api/portraits/men/65.jpg\",\n        \"medium\": \"https://randomuser.me/api/portraits/med/men/65.jpg\",\n        \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/65.jpg\"\n      },\n      \"nat\": \"NO\"\n    }\n  ],\n  \"info\": {\n    \"seed\": \"2da87e9305069f1d\",\n    \"results\": 1,\n    \"page\": 1,\n    \"version\": \"1.2\"\n  }\n}\n"
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/users?email=rolf.hegdal@example.com",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "rolf.hegdal@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"rolf.hegdal@example.com\",\n\t\"newName\": {\n        \"title\": \"mr\",\n        \"first\": \"Not\",\n        \"last\": \"Sure\"\n     }\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
