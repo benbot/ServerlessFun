@@ -134,7 +134,6 @@ module.exports.getUser = async (event) => {
 
 module.exports.createUser = async (event) => {
   try {
-    console.log(event)
     let user = JSON.parse(event.body);
     if (JSON.parse(event.body).results && JSON.parse(event.body).results.length > 0) {
       user = JSON.parse(event.body).results[0];
@@ -161,7 +160,6 @@ module.exports.createUser = async (event) => {
     };
   }
   catch (e) {
-    console.log(e)
     return {
       statusCode: 500,
       body: JSON.stringify({
