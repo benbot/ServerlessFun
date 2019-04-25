@@ -43,13 +43,48 @@ module.exports.deleteUser = async (event) => {
 };
 
 module.exports.updateUser = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `you are ${event.name}`,
-      thing: event
-    }, null, 2),
+  const body = JSON.parse(event.body);
+  const params = {
+    TableName: 'usersTable',
+    Key: {
+      email: body.email,
+    },
+    ExpressionAttributeNames: {
+      '#real_name': 'name',
+    },
+    ExpressionAttributeValues: {
+      ':new_name': body.newName,
+    },
+    UpdateExpression: 'SET #real_name = :new_name',
+    ReturnValues: 'ALL_NEW',
   };
+
+  try {
+    const updatedUser = await new Promise((resolve, reject) => {
+      db.update(params, (err, result) => {
+        if (err === null) {
+          resolve(result);
+        } else {
+          reject(result);
+        }
+      });
+    });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        user: updatedUser
+      }, null, 2),
+    };
+  }
+  catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        err: e
+      }, null, 2),
+    };
+  }
 };
 
 module.exports.getUser = async (event) => {
