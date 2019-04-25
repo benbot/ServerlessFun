@@ -88,13 +88,48 @@ module.exports.updateUser = async (event) => {
 };
 
 module.exports.getUser = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `you are ${event.name}`,
-      thing: event
-    }, null, 2),
-  };
+  try {
+    const user = await new Promise((resolve, reject) => {
+      db.get({
+        TableName: 'usersTable',
+        Key: {
+          email: event.queryStringParameters['email']
+        }
+      }, (err, res) => {
+        if (err !== null) {
+          reject(err);
+        } else {
+          resolve(res);
+        }
+      });
+    });
+
+
+    if (user.Item['email'] === undefined) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({
+          msg: "User not found"
+        })
+      };
+    }
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        user: user.Item
+      }, null, 2),
+    };
+
+  }
+  catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: e
+      }, null, 2),
+    };
+  }
 };
 
 module.exports.createUser = async (event) => {
