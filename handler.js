@@ -9,12 +9,36 @@ const db = new AWS.DynamoDB.DocumentClient({
 });
 
 module.exports.deleteUser = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `you are ${event.name}`,
-      thing: event
-    }, null, 2),
+  try {
+    await new Promise((resolve, reject) => {
+      db.delete({
+        TableName: 'usersTable',
+        Key: {
+          email: event.queryStringParameters['email']
+        }
+      }, (error) => {
+        if (error === null) {
+          resolve();
+        } else {
+          reject(error);
+        }
+      });
+    });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "User deleted"
+      }, null, 2),
+    };
+  }
+  catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: e
+      }, null, 2),
+    };
   };
 };
 
